@@ -18,7 +18,7 @@ func checkDate(task *db.Task) error {
 
 	t, err := time.Parse(layout, task.Date)
 	if err != nil {
-		return fmt.Errorf("Дата указана в неверном формате: %v", err)
+		return fmt.Errorf("дата указана в неверном формате: %v", err)
 	}
 
 	// если есть repeat — проверим и пересчитаем дату

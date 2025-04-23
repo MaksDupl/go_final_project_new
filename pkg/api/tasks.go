@@ -12,7 +12,7 @@ type TasksResp struct {
 func TasksHandler(w http.ResponseWriter, r *http.Request) {
 	tasks, err := db.Tasks(50)
 	if err != nil {
-		writeJSON(w, map[string]string{"error": "Ошибка получения задач: " + err.Error()})
+		writeJSON(w, http.StatusInternalServerError, map[string]string{"error": "Ошибка получения задач: " + err.Error()})
 		return
 	}
 
@@ -20,7 +20,7 @@ func TasksHandler(w http.ResponseWriter, r *http.Request) {
 		tasks = []*db.Task{}
 	}
 
-	writeJSON(w, TasksResp{
+	writeJSON(w, http.StatusOK, TasksResp{
 		Tasks: tasks,
 	})
 }
